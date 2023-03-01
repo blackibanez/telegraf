@@ -32,6 +32,11 @@ RUN set -ex && \
 
 EXPOSE 8125/udp 8092/udp 8094
 
+# Synology SNMP
+COPY synology/* /usr/share/snmp/mibs/
+RUN chown root:root /usr/share/snmp/mibs
+RUN chmod 755 /usr/share/snmp/mibs
+
 COPY entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["telegraf"]
